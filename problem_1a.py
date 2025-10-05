@@ -17,3 +17,21 @@ print("="*60)
 
 kmeans = KMeans(n_clusters=2, random_state=42, n_init=10)
 kmeans.fit(train_data)
+
+train_clusters = kmeans.labels_
+
+print(f"Cluster centers shape: {kmeans.cluster_centers_.shape}")
+print(f"Training samples in cluster 0: {np.sum(train_clusters == 0)}")
+print(f"Training samples in cluster 1: {np.sum(train_clusters == 1)}")
+
+print("\n" + "="*60)
+print("Determining cluster labels...")
+print("="*60)
+
+cluster_0_labels = train_labels[train_clusters == 0]
+cluster_1_labels = train_labels[train_clusters == 1]
+cluster_0_mean = np.mean(cluster_0_labels)
+cluster_1_mean = np.mean(cluster_1_labels)
+
+print(f"Cluster 0 mean label: {cluster_0_mean:.4f}")
+print(f"Clister 1 mean label: {cluster_1_mean:.4f}")
