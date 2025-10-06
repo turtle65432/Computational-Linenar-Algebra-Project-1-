@@ -28,9 +28,9 @@ music_df = load_data_from_csv(Music_Feature_File)
 if music_df is None:
     exit()
 
-N_Students = 29 
+N_Students = 30
 
-class_roster_names = roster_df.iloc[1 : N_Students + 1, 0].reset_index(drop=True).rename('Roster')
+class_roster_names = roster_df.iloc[0 : N_Students + 1, 0].reset_index(drop=True).rename('Roster')
 roster_col_index = 0
 
 if len(class_roster_names) != N_Students:
