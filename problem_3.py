@@ -20,7 +20,7 @@ def load_data_from_csv(filename):
         print(f"Details: {e}")
         return None
 
-roster_df = load_data_from_csv(Roster_File)
+roster_df = pd.read_csv(Roster_File, header=None)
 if roster_df is None:
     exit()
 
@@ -28,7 +28,7 @@ music_df = load_data_from_csv(Music_Feature_File)
 if music_df is None:
     exit()
 
-N_Students = 30
+N_Students = 31
 
 class_roster_names = roster_df.iloc[0 : N_Students + 1, 0].reset_index(drop=True).rename('Roster')
 roster_col_index = 0
