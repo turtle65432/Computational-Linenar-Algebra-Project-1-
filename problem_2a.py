@@ -2,7 +2,7 @@ import numpy as np
 
 # === Step 1: Load A (features) and b (labels) ===
 A = np.loadtxt("train.txt", delimiter=",")            # shape (300, 30)
-b = np.loadtxt("train values.txt", delimiter=",")     # shape (300,)
+b = np.loadtxt("train_values.txt", delimiter=",")     # shape (300,)
 
 print("A shape:", A.shape)
 print("b shape:", b.shape)

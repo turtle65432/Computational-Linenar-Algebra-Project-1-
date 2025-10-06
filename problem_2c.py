@@ -45,3 +45,31 @@ for i in range(V1.shape[0]):
     label = classify(y)
     predictions.append(label)
     print(f"Sample {i+1}: Prediction = {label}")
+
+# Indentify the percentage of incorrectly classified samples
+
+
+# === Step 1: Load validation features and true labels ===
+V = np.loadtxt("validate.txt", delimiter=",")              # shape (N, 30)
+true_labels = np.loadtxt("validate_values.txt", delimiter=",")  # shape (N,)
+
+# === Step 2: Add intercept column to match model ===
+V1 = np.hstack([V, np.ones((V.shape[0], 1))])  # shape (N, 31)
+
+# === Step 3: Define classifier ===
+def classify(y):
+    return 1 if y >= 0 else -1
+
+# === Step 4: Predict and compare ===
+incorrect = 0
+for i in range(V1.shape[0]):
+    y = np.dot(x, V1[i])  # model prediction
+    pred = classify(y)
+    if pred != true_labels[i]:
+        incorrect += 1
+
+# === Step 5: Compute error percentage ===
+total = V1.shape[0]
+error_rate = (incorrect / total) * 100
+print(f"\nIncorrectly classified samples: {incorrect} out of {total}")
+print(f"Error rate: {error_rate:.2f}%")
