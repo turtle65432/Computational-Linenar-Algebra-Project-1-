@@ -45,3 +45,21 @@ for i in range(V1.shape[0]):
     label = classify(y)
     predictions.append(label)
     print(f"Sample {i+1}: Prediction = {label}")
+
+# === Step 10: Load true validation labels ===
+V_true = np.loadtxt("validate_values.txt", delimiter=",") # shape (N,)
+
+# === Step 11: Convert predictions to a numpy array for easy comparison ===
+predictions_array = np.array(predictions)
+
+# === Step 12: Calculate incorrect classifications (Problem 2c) ===
+# Incorrect classification occurs when prediction != true label
+incorrect_count = np.sum(predictions_array != V_true)
+
+# === Step 13: Calculate percentage of incorrect samples (Problem 2c) ===
+total_samples = V_true.shape[0]
+incorrect_percentage = (incorrect_count / total_samples) * 100
+
+print(f"\nTotal validation samples: {total_samples}")
+print(f"Number of incorrect classifications: {incorrect_count}")
+print(f"Percentage of samples incorrectly classified: {incorrect_percentage:.2f}%")

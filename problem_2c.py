@@ -73,3 +73,43 @@ total = V1.shape[0]
 error_rate = (incorrect / total) * 100
 print(f"\nIncorrectly classified samples: {incorrect} out of {total}")
 print(f"Error rate: {error_rate:.2f}%")
+
+# --- Completion for Problem 2(c) ---
+
+# === Step 6: Evaluate model on TRAINING data ===
+# A1 and b are already loaded from the beginning of the script
+
+training_predictions_y = A1 @ x # Vector of predictions (y) for the training data
+training_incorrect = 0
+
+# Apply classifier and compare to true training labels (b)
+for i in range(A1.shape[0]):
+    y = training_predictions_y[i]
+    pred = classify(y) # Uses the same classify function from Step 3
+    if pred != b[i]:
+        training_incorrect += 1
+
+# === Step 7: Compute training error percentage ===
+training_total = A1.shape[0] # Should be 300
+training_error_rate = (training_incorrect / training_total) * 100
+
+print(f"\n--- Training Data Analysis ---")
+print(f"Incorrectly classified training samples: {training_incorrect} out of {training_total}")
+print(f"Training Error rate: {training_error_rate:.2f}%")
+print(f"Training Success rate: {100 - training_error_rate:.2f}%")
+
+
+# === Step 8: Compare validation and training success rates (Final Answer to 2c) ===
+validation_success_rate = 100 - error_rate
+training_success_rate_calc = 100 - training_error_rate
+
+comparison = ""
+if validation_success_rate > training_success_rate_calc:
+    comparison = "greater than"
+elif validation_success_rate < training_success_rate_calc:
+    comparison = "smaller than"
+else:
+    comparison = "equal to"
+
+print(f"\n--- Comparison ---")
+print(f"The success rate on the validation data ({validation_success_rate:.2f}%) is **{comparison}** the success rate on the training data ({training_success_rate_calc:.2f}%).")
